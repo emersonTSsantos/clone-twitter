@@ -28,7 +28,7 @@ export const Input = ({ placeholder, value, password, icon, filled, onChange }: 
                 />
             }
             <input
-                type={password ? "password" : "text"}
+                type={password && !showPassword ? "password" : "text"}
                 className="flex-1 bg-transparent outline-none h-full px-4"
                 placeholder={placeholder}
                 value={value}
