@@ -9,7 +9,7 @@ export const Button = ({ label, onclick, size }: Props ) => {
     return (
         <div 
             onClick={onclick} 
-            className={`flex items-center justify-center cursor-pointer bg-white text-black font-bold rounded-3xl hover:bg-gray-300 transition-colors
+            className={`flex items-center justify-center cursor-pointer bg-gray-200 text-black font-bold rounded-3xl hover:bg-white transition-colors
 
                 ${size === 1 && 'h-14 text-lg'}
                 ${size === 2 && 'h-10 text-md'}
