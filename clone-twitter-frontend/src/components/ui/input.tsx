@@ -14,25 +14,33 @@ type Props = {
     filled?: boolean;
     icon?: IconDefinition;
     onChange?: (newValue: string) => void;
+    onEnter?: () => void;
 }
 
-export const Input = ({ placeholder, value, password, icon, filled, onChange }: Props) => {
+export const Input = ({ placeholder, value, password, icon, filled, onChange, onEnter }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
-    
+
+    const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.code.toLowerCase() === 'enter' && onEnter) {
+            onEnter();
+        }
+    }
+
     return (
         <div className={`has-[:focus]:border-white flex items-center h-14 rounded-3xl border-2 border-gray-800 ${filled && 'bg-gray-800'} `}>
             {icon &&
                 <FontAwesomeIcon 
                     icon={icon}
-                    className="size-6 text-gray-500 hover:text-white transition-colors duration-300"
+                    className="cursor-pointer ml-4 size-6 text-gray-500 hover:text-white transition-colors duration-300"
                 />
             }
             <input
                 type={password && !showPassword ? "password" : "text"}
-                className="flex-1 bg-transparent outline-none h-full px-4"
+                className="flex-1 outline-none h-full px-4"
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange && onChange(e.target.value)}
+                onKeyUp={handleKeyUp}
             />
             {password && (
                 <FontAwesomeIcon
